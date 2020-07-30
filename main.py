@@ -4,7 +4,6 @@ from agenda import Agenda
 import os
 
 agenda = Agenda('contatos.csv')
-print(dir(agenda))
 
 
 while True:
