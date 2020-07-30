@@ -1,45 +1,48 @@
 import os
 
-contatos = []
-arquivo = open('contatos.csv','r')
-contatos = arquivo.readlines()
-arquivo.close()
+class Agenda:
+    def __init__(self, arquivo):
+        self.contatos = open(arquivo,'r')
+        self.contatos = self.contatos.readlines()
 
-def criar(contatos):
-    os.system('clear')
-    nome = input('Digite um nome: ')
-    telefone = input('Digite um telefone: ')
-    contato = nome+"; "+telefone+"\n"
-    contatos.append(contato)
-    contatos.sort()
-    gravar(contatos)
+    def criar(self):
+        os.system('clear')
+        nome = input('Digite um nome: ')
+        telefone = input('Digite um telefone: ')
+        contato = nome+"; "+telefone+"\n"
+        self.contatos.append(contato)
+        self.contatos.sort()
+        self._gravar('contatos.csv')
 
-def gravar(contatos):
-    arquivo = open("contatos.csv", "w")
-    tamanho =  len(contatos)
+    def _gravar(self, arquivo):
+        dados = open(arquivo, "w")
+        tamanho =  len(self.contatos)
 
-    for i in range(tamanho):
-        arquivo.write(contatos[i])
-    arquivo.close()
+        for i in range(tamanho):
+            dados.write(self.contatos[i])
+        dados.close()
 
-    print("Contato inserido com sucesso!")
-    os.system("sleep 2s")
+        print("Contato inserido com sucesso!")
+        os.system("sleep 2s")
 
-def excluir(contatos):
-    listar(contatos)
-    delete = int(input("Qual deseja apagar? " ))
-    contatos.pop(delete)
-    print(f"Registro '{delete}' excluido")
-    gravar(contatos)
-    os.system("sleep 1s")
+    def excluir(self):
+        self.listar()
+        delete = int(input("Qual deseja apagar? " ))
+        self.contatos.pop(delete)
+        print(f"Registro '{delete}' excluido")
+        self._gravar('contatos.csv')
+        os.system("sleep 1s")
 
-def listar(contatos):
-    tamanho = len(contatos)
+    def listar(self):
+        tamanho = len(self.contatos)
 
-    for i in range(tamanho):
-        print(i, "; ", contatos[i])
+        for i in range(tamanho):
+            print(i, "; ", self.contatos[i])
 
-    os.system("sleep 1s")
+        os.system("sleep 1s")
+
+agenda = Agenda('contatos.csv')
+print(dir(agenda))
 
 def menu():
     os.system('clear')
@@ -55,11 +58,11 @@ def menu():
 while True:
    opcao = menu()
    if opcao ==  1:
-       criar(contatos)
+      agenda.criar()
    elif opcao ==  2:
-       excluir(contatos)
+       agenda.excluir()
    elif opcao ==  3:
-       listar(contatos)
+       agenda.listar()
    elif opcao ==  4:
        break
    else:
