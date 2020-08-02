@@ -49,5 +49,19 @@ class Agenda:
         print("3 - Listar contatos")
         print("4 - Sair")
         print('\n', "=" * 30)
-        opcao =  input('Opcao: ')
-        return int(opcao)
+        self.opcao =  int(input('Opcao: '))
+
+    def start(self):
+        while True:
+           self.menu()
+           if self.opcao ==  1:
+              self.criar()
+           elif self.opcao ==  2:
+               self.excluir()
+           elif self.opcao ==  3:
+               self.listar()
+           elif self.opcao ==  4:
+               break
+           else:
+               print('Opção invalida!')
+               os.system("sleep 2s")
