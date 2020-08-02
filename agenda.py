@@ -2,9 +2,8 @@ import os
 
 class Agenda:
     def __init__(self, arquivo):
-        self.agenda = open(arquivo,'r')
-        self.contatos = self.agenda.readlines()
-
+        self.contato = arquivo
+        
     def criar(self):
         os.system('clear')
         nome = input('Digite um nome: ')
@@ -12,10 +11,10 @@ class Agenda:
         contato = nome+"; "+telefone+"\n"
         self.contatos.append(contato)
         self.contatos.sort()
-        self._gravar('contatos.csv')
+        self._gravar()
 
-    def _gravar(self, arquivo):
-        agenda = open(arquivo, "w")
+    def _gravar(self):
+        agenda = open(self.contato, "w")
         tamanho =  len(self.contatos)
 
         for i in range(tamanho):
@@ -30,10 +29,12 @@ class Agenda:
         delete = int(input("Qual deseja apagar? " ))
         self.contatos.pop(delete)
         print(f"Registro '{delete}' excluido")
-        self._gravar('contatos.csv')
+        self._gravar()
         os.system("sleep 1s")
 
     def listar(self):
+        self.agenda = open(self.contato,'r')
+        self.contatos = self.agenda.readlines()
         tamanho = len(self.contatos)
 
         for i in range(tamanho):
