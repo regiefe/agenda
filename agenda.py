@@ -1,9 +1,11 @@
+from time import sleep
 import os
 
 class Agenda:
     def __init__(self, arquivo):
+        self.contatos= []
         self.contato = arquivo
-        
+
     def criar(self):
         os.system('clear')
         nome = input('Digite um nome: ')
@@ -22,7 +24,7 @@ class Agenda:
         agenda.close()
 
         print("Contato inserido com sucesso!")
-        os.system("sleep 2s")
+        sleep(2)
 
     def excluir(self):
         self.listar()
@@ -30,7 +32,7 @@ class Agenda:
         self.contatos.pop(delete)
         print(f"Registro '{delete}' excluido")
         self._gravar()
-        os.system("sleep 1s")
+        sleep(1)
 
     def listar(self):
         self.agenda = open(self.contato,'r')
@@ -40,7 +42,7 @@ class Agenda:
         for i in range(tamanho):
             print(i, "; ", self.contatos[i])
 
-        os.system("sleep 1s")
+        sleep(1)
 
     def menu(self):
         os.system('clear')
@@ -65,4 +67,4 @@ class Agenda:
                break
            else:
                print('Opção invalida!')
-               os.system("sleep 2s")
+               sleep(2)
